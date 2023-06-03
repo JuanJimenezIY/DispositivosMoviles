@@ -1,7 +1,10 @@
 package com.example.dispositivos.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.example.dispositivos.Logic.validator.LoginValidator
 import com.example.dispositivos.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -19,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+
+
         initClass()
     }
 
@@ -26,16 +32,64 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
     private fun initClass() {
-        binding.boton1.setOnClickListener {
-            binding.txtBuscar.text = "El codigo se ejecuta correctamente"
+        binding.btnLogin.setOnClickListener {
+            //obtenemos la instancia de la clase
+            //val loginVal =LoginValidator()
+            //acceod al metodo y le vincio los dos parametros que necsito
+            val check=LoginValidator().checkLogin(
+                binding.txtName.text.toString(),
+                binding.txtName.text.toString()
+            )
+
+            if (check){
+                //Intents
+                var intent =Intent(this,EmptyActivity::class.java
+                )
+                intent.putExtra("var1","UCE")
+                intent.putExtra("var2",binding.txtName.text.toString())
+                startActivity(intent)
+            }
+            else{
+                Snackbar.make(
+                    binding.editTextText
+                    ,"Usuario y contraseña invalidos",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+/*
+            if(binding.txtName.text.toString()=="admin" && binding.txtName.text.toString()=="admin"){
+
+                //Intents
+                var intent =Intent(this,EmptyActivity::class.java
+                )
+                intent.putExtra("var1","UCE")
+                intent.putExtra("var2",binding.txtName.text.toString())
+                startActivity(intent)
+
+            }else
+            {
+                Snackbar.make(
+                    binding.editTextText
+                    ,"Usuario y contraseña invalidos",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+*/
+           // binding.txtBuscar.text = "El codigo se ejecuta correctamente"
 
             //SUMA
+            /*
             var f = Snackbar.make(
                 binding.boton1,
                 "Este es otro mensaje",
                 Snackbar.LENGTH_SHORT
             )
-                .show()
+                .show()*/
+
+
+
+
+
         }
     }
 
