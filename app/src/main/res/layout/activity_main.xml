@@ -19,25 +19,12 @@
         android:layout_marginEnd="101dp"
         android:text="@string/name_banner"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/boton1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.06" />
 
-    <Button
-
-        android:id="@+id/boton1"
-        android:layout_width="77dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#E84B24"
-        app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_buscar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        app:layout_constraintVertical_bias="1.0" />
     <!--
             app:icon="@drawable/tune_48px"
             app:iconGravity="top"
@@ -46,22 +33,58 @@
 -->
 
 
-    <TextView
-        android:id="@+id/txt_buscar"
-        android:layout_width="293dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="11dp"
+    <Button
+
+        android:id="@+id/btn_login"
+        android:layout_width="149dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="259dp"
+        android:backgroundTint="#E84B24"
+        android:text="Ingresar"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
+    <EditText
+        android:id="@+id/txt_name"
+        android:layout_width="241dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="96dp"
         android:height="100dp"
         android:background="#191D27"
         android:fontFamily="monospace"
-        android:foreground="?android:attr/actionModeWebSearchDrawable"
-        android:foregroundGravity="left|center_vertical"
-        android:gravity="center"
-        android:text="Search..."
+
+
+        android:hint="User name"
+        android:textColor="@color/font_color_dm"
+        android:textColorHint="@color/font_color_dm"
         android:textSize="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/boton1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="246dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="220dp"
+        android:height="100dp"
+        android:background="#191D27"
+        android:fontFamily="monospace"
+        android:hint="password"
+        android:textColor="@color/font_color_dm"
+
+
+        android:textColorHint="@color/font_color_dm"
+        android:textSize="25dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
