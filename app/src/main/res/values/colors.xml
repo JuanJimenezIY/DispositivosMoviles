@@ -5,4 +5,11 @@
     <color name="background_dm">#F7131212</color>
     <color name="font_color_dm">#F3615757</color>
     <color name="title_color_dm">#FBFBFB</color>
+
+    <color name="background_ej">#FFFFFF</color>
+    <color name="title_color_ej">#F7000000</color>
+    <color name="font_color_ej">#F7979191</color>
+    <color name="principal_color_ej">#F7FF5F76</color>
+    <color name="button_font_color_ej">#F7FFFFFF</color>
+    <color name="hint_text">#F71F1F1F</color>
 </resources>

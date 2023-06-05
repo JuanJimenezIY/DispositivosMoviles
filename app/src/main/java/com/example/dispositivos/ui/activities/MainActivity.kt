@@ -3,31 +3,23 @@ package com.example.dispositivos.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.dispositivos.Logic.validator.LoginValidator
 import com.example.dispositivos.databinding.ActivityMainBinding
+import com.example.dispositivos.logic.validator.LoginValidator
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-
     }
-
     override fun onStart() {
         super.onStart()
 
-
-
         initClass()
     }
-
     override fun onDestroy() {
         super.onDestroy()
     }
@@ -36,9 +28,9 @@ class MainActivity : AppCompatActivity() {
             //obtenemos la instancia de la clase
             //val loginVal =LoginValidator()
             //acceod al metodo y le vincio los dos parametros que necsito
-            val check=LoginValidator().checkLogin(
+            val check= LoginValidator().checkLogin(
                 binding.txtName.text.toString(),
-                binding.txtName.text.toString()
+                binding.txtPassword.text.toString()
             )
 
             if (check){
@@ -51,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 Snackbar.make(
-                    binding.editTextText
-                    ,"Usuario y contraseña invalidos",
+                    binding.txtTitulo
+                    ,"Usuario y contraseña incorrectos",
                     Snackbar.LENGTH_LONG
                 ).show()
             }
