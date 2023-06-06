@@ -9,7 +9,6 @@ class LoginValidator {
 
         return(admin.name==name
                 && admin.pass==password)
-
     }
 
 }

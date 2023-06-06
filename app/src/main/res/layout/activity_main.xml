@@ -14,13 +14,13 @@
         style="@style/textTitle"
         android:layout_width="320dp"
         android:layout_height="57dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="240dp"
         android:text="@string/name_banner"
         app:layout_constraintBottom_toTopOf="@id/txt_subtitulo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
 
@@ -31,172 +31,177 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/principal_color_ej"
         android:text="Ingresar"
+        android:textAllCaps="false"
         app:cornerRadius="10dp"
-
         app:layout_constraintBottom_toTopOf="@id/redes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_password" />
+        app:layout_constraintTop_toBottomOf="@id/password_toggle" />
 
     <EditText
         android:id="@+id/txt_name"
         style="@style/hintText"
         android:layout_width="320dp"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/tamanio"
         android:hint="example@email.com"
         app:layout_constraintBottom_toTopOf="@id/txt_contraseña"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_correo" />
 
-    <EditText
-        android:id="@+id/txt_password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_toggle"
         style="@style/hintText"
-        android:drawableRight="@drawable/baseline_remove_red_eye_24"
-        android:drawableTint="#D1D1D1"
-        android:hint="password"
-        android:inputType="textPassword"
         android:layout_width="320dp"
-        android:layout_height="51dp"
+        android:layout_height="@dimen/tamanio"
         app:layout_constraintBottom_toTopOf="@id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_contraseña"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/txt_password"
+            style="@style/hintText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="320dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_edi" />
+
+    <TextView
+        android:id="@+id/txt_subtitulo"
+        style="@style/textSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Hola! Es bueno verte nuevamente"
+        app:layout_constraintBottom_toTopOf="@+id/txt_correo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_titulo" />
+
+    <TextView
+        android:id="@+id/txt_correo"
+        style="@style/loginTextTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Correo"
+        app:layout_constraintBottom_toTopOf="@+id/txt_name"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_subtitulo" />
+
+    <TextView
+        android:id="@+id/txt_contraseña"
+        style="@style/loginTextTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Contraseña"
+        app:layout_constraintBottom_toTopOf="@id/password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+
+    <TextView
+        android:id="@+id/redes"
+        style="@style/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="O conéctese usando las redes sociales"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <Button
+        android:id="@+id/twitter"
+        style="@style/socialText"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#1DA1F2"
+        android:fontFamily="@font/roboto"
+        android:text="Twitter"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/twitter"
+
+        app:iconPadding="2dp"
+        app:iconSize="20dp"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/txt_olvido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/facebook"
+        style="@style/socialText"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="44dp"
+        android:backgroundTint="#3b5998"
+        android:text="Facebook"
+        app:cornerRadius="10dp"
+
+        app:icon="@drawable/face_icon"
+        app:iconPadding="10dp"
+        app:iconSize="20dp"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/registro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_olvido"
+        style="@style/textSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvido su contraseña?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/registro"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twitter" />
+
+    <TextView
+        android:id="@+id/registro"
+        style="@style/loginTextTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:text="Registrese"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/facebook" />
 
 
-
-
-     <ImageView
-         android:id="@+id/imageView"
-         android:layout_width="320dp"
-         android:layout_height="185dp"
-         android:layout_marginTop="25dp"
-         app:layout_constraintBottom_toTopOf="@+id/txt_titulo"
-         app:layout_constraintEnd_toEndOf="parent"
-
-         app:layout_constraintHorizontal_bias="0.5"
-         app:layout_constraintStart_toStartOf="parent"
-
-         app:layout_constraintTop_toTopOf="parent"
-         app:srcCompat="@drawable/logo_edi" />
-
-     <TextView
-         android:id="@+id/txt_subtitulo"
-         style="@style/textSubTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="¡Hola! Es bueno verte nuevamente"
-         app:layout_constraintBottom_toTopOf="@+id/txt_correo"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.33"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/txt_titulo" />
-
-     <TextView
-         android:id="@+id/txt_correo"
-         style="@style/loginTextTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="20dp"
-         android:text="Correo"
-         app:layout_constraintBottom_toTopOf="@+id/txt_name"
-         app:layout_constraintEnd_toEndOf="parent"
-
-         app:layout_constraintHorizontal_bias="0.126"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/txt_subtitulo" />
-
-     <TextView
-         android:id="@+id/txt_contraseña"
-         style="@style/loginTextTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="20dp"
-         android:text="Contraseña"
-         app:layout_constraintBottom_toTopOf="@id/txt_password"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.139"
-         app:layout_constraintStart_toStartOf="parent"
-
-         app:layout_constraintTop_toBottomOf="@+id/txt_name" />
-
-     <TextView
-         android:id="@+id/redes"
-         style="@style/text"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="25dp"
-         android:text="O conéctese usando las redes sociales"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
-
-     <Button
-         android:id="@+id/twitter"
-         style="@style/socialText"
-         android:layout_width="150dp"
-         android:layout_height="60dp"
-         android:layout_marginStart="44dp"
-         android:layout_marginTop="40dp"
-         android:backgroundTint="#1DA1F2"
-         android:fontFamily="@font/roboto"
-         android:text="Twitter"
-         app:cornerRadius="10dp"
-         app:icon="@drawable/twitter"
-
-         app:iconPadding="2dp"
-         app:iconSize="20dp"
-         app:iconTint="#FFFFFF"
-         app:layout_constraintBottom_toTopOf="@+id/txt_olvido"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/btn_login"
-         app:layout_constraintVertical_bias="0.0" />
-
-     <Button
-         android:id="@+id/facebook"
-         style="@style/socialText"
-         android:layout_width="150dp"
-         android:layout_height="60dp"
-         android:layout_marginTop="40dp"
-         android:layout_marginEnd="44dp"
-         android:backgroundTint="#3b5998"
-         android:text="Facebook"
-         app:cornerRadius="10dp"
-         app:icon="@drawable/face_icon"
-         app:iconPadding="10dp"
-         app:iconSize="20dp"
-         app:iconTint="#FFFFFF"
-         app:layout_constraintBottom_toTopOf="@+id/registro"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/btn_login"
-         app:layout_constraintVertical_bias="0.0" />
-
-     <TextView
-         android:id="@+id/txt_olvido"
-         style="@style/textSubTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="¿Olvido su contraseña?"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toStartOf="@+id/registro"
-         app:layout_constraintHorizontal_bias="0.469"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/twitter" />
-
-     <TextView
-         android:id="@+id/registro"
-         style="@style/loginTextTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginEnd="56dp"
-         android:text="Registrese"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/facebook" />
-
-
- </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

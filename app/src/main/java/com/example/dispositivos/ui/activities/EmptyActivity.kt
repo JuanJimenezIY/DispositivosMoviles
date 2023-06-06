@@ -15,6 +15,7 @@ class EmptyActivity : AppCompatActivity() {
         Log.d("UCE","Entrando a Create")
         binding=ActivityEmptyBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
     override fun onStart() {
         super.onStart()

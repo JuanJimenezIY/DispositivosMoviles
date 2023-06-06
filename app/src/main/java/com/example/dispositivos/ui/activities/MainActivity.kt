@@ -8,16 +8,15 @@ import com.example.dispositivos.logic.validator.LoginValidator
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
     }
     override fun onStart() {
         super.onStart()
-
         initClass()
     }
     override fun onDestroy() {
@@ -32,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                 binding.txtName.text.toString(),
                 binding.txtPassword.text.toString()
             )
+
 
             if (check){
                 //Intents
@@ -48,7 +48,10 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+
+
 /*
+
             if(binding.txtName.text.toString()=="admin" && binding.txtName.text.toString()=="admin"){
 
                 //Intents
@@ -77,10 +80,6 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.LENGTH_SHORT
             )
                 .show()*/
-
-
-
-
 
         }
     }
