@@ -16,7 +16,6 @@
         android:layout_height="57dp"
         android:layout_marginTop="240dp"
         android:text="@string/name_banner"
-        app:layout_constraintBottom_toTopOf="@id/txt_subtitulo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,34 +27,46 @@
         style="@style/button"
         android:layout_width="320dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/principal_color_ej"
         android:text="Ingresar"
         android:textAllCaps="false"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@id/redes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_toggle" />
 
-    <EditText
-        android:id="@+id/txt_name"
+    <com.google.android.material.textfield.TextInputLayout
         style="@style/hintText"
+        android:id="@+id/txt_name1"
         android:layout_width="320dp"
         android:layout_height="@dimen/tamanio"
-        android:hint="example@email.com"
-        app:layout_constraintBottom_toTopOf="@id/txt_contraseña"
+        app:placeholderText="example@email.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_correo" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_correo"
+        >
+
+    <EditText
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Correo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_correo"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_toggle"
         style="@style/hintText"
+        app:placeholderText="******"
         android:layout_width="320dp"
         android:layout_height="@dimen/tamanio"
-        app:layout_constraintBottom_toTopOf="@id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_contraseña"
@@ -63,10 +74,9 @@
 
         <EditText
             android:id="@+id/txt_password"
-            style="@style/hintText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="password"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +104,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¡Hola! Es bueno verte nuevamente"
-        app:layout_constraintBottom_toTopOf="@+id/txt_correo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Correo"
-        app:layout_constraintBottom_toTopOf="@+id/txt_name"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintHorizontal_bias="0.126"
@@ -121,12 +129,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Contraseña"
-        app:layout_constraintBottom_toTopOf="@id/password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_name1" />
 
     <TextView
         android:id="@+id/redes"
@@ -155,10 +162,8 @@
         app:iconPadding="2dp"
         app:iconSize="20dp"
         app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/txt_olvido"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/redes" />
 
     <Button
         android:id="@+id/facebook"
@@ -175,10 +180,8 @@
         app:iconPadding="10dp"
         app:iconSize="20dp"
         app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/registro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/redes" />
 
     <TextView
         android:id="@+id/txt_olvido"
