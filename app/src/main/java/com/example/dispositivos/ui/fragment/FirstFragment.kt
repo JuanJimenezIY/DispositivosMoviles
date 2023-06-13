@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.ArrayAdapter
+import android.widget.SimpleAdapter
 import androidx.fragment.app.Fragment
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.FragmentFirstBinding
@@ -29,5 +32,23 @@ class FirstFragment : Fragment() {
 
         return  binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        val names= arrayListOf<String>("Carlos","Juan","Xavier","Andres","Pepe","Rosa","Antonio")
+
+    val adapter= ArrayAdapter<String>(
+        requireActivity(),R.layout.simple_spinner,names)
+
+
+
+    binding.spinner.adapter= adapter
+       // binding.listView.adapter = adapter
+    }
+
+
+
+
+
 }
 

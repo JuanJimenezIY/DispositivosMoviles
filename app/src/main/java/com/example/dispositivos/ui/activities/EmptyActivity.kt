@@ -4,9 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.ActivityEmptyBinding
 import com.example.dispositivos.ui.fragment.FirstFragment
+import com.example.dispositivos.ui.fragment.SecondFragment
+import com.example.dispositivos.ui.fragment.ThirdFragment
+import com.example.dispositivos.ui.utilities.FragmentsManager
 import com.google.android.material.snackbar.Snackbar
 
 class EmptyActivity : AppCompatActivity() {
@@ -26,9 +30,9 @@ class EmptyActivity : AppCompatActivity() {
 //            // it.toString()
 //             name= it?.getString("var2")!!
 //        }
-        Log.d("UCE","Hola${name}")
-        binding.textView.text="Bienvenido "+name.toString()
-        Log.d("UCE","Entrando a Start")
+//        Log.d("UCE","Hola${name}")
+//        binding.textView.text="Bienvenido "+name.toString()
+//        Log.d("UCE","Entrando a Start")
 
         initClass()
     }
@@ -53,37 +57,38 @@ class EmptyActivity : AppCompatActivity() {
 
         }
 
-        binding.bottomNavigation.setOnNavigationItemReselectedListener { item ->
+
+
+        binding.bottomNavigation.setOnItemReselectedListener { item ->
             when(item.itemId) {
                 R.id.inicio -> {
                     // Respond to navigation item 1 click
-                val frag= FirstFragment()
-                    val transacction= supportFragmentManager.beginTransaction()
-                    transacction.add(binding.frmContainer.id,frag)
-                    transacction.addToBackStack(null)
-                    transacction.commit()
+               FragmentsManager().replaceFragment(
+                   supportFragmentManager,binding.frmContainer.id,FirstFragment()
+               )
                     true
                 }
                 R.id.favoritos -> {
                     // Respond to navigation item 2 click
-                    var suma: Int =0
-                    for(i in listOf(1,2,3)){
-                        suma=suma+i
-                    }
-                    Snackbar.make(
-                        binding.bottomNavigation
-                        ,"La suma es ${suma}",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    FragmentsManager().replaceFragment(
+                        supportFragmentManager,binding.frmContainer.id,SecondFragment()
+                    )
+
                     true
                 }
                 R.id.apis -> {
                     // Respond to navigation item 2 click
+                    FragmentsManager().replaceFragment(
+                        supportFragmentManager,binding.frmContainer.id,ThirdFragment()
+                    )
+
                     true
                 }
                 else -> false
 
             }
             startActivity(intent)
-        }}
-}
+        }
+    }  }
+
+
