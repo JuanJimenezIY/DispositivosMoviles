@@ -25,7 +25,7 @@ class EmptyActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        var name:String=""
+ //       var name:String=""
 //        intent.extras.let {
 //            // it.toString()
 //             name= it?.getString("var2")!!
@@ -37,6 +37,8 @@ class EmptyActivity : AppCompatActivity() {
         initClass()
     }
     private fun initClass(){
+
+
         binding.button1.setOnClickListener{
             /*
             var f = Snackbar.make(
@@ -59,7 +61,7 @@ class EmptyActivity : AppCompatActivity() {
 
 
 
-        binding.bottomNavigation.setOnItemReselectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.inicio -> {
                     // Respond to navigation item 1 click
@@ -87,8 +89,14 @@ class EmptyActivity : AppCompatActivity() {
                 else -> false
 
             }
-            startActivity(intent)
+
+
+
         }
-    }  }
+        startActivity(intent)
+    }
+
+}
+
 
 

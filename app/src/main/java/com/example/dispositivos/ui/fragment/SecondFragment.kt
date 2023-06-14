@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.databinding.FragmentSecondBinding
