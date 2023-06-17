@@ -2,7 +2,7 @@ package com.example.dispositivos.logic.lists
 
 import com.example.dispositivos.ui.utilities.MarvelChars
 
-class Listitems
+class ListItems
 
 {
     fun returnMarvelChar():List<MarvelChars>{
@@ -11,12 +11,7 @@ class Listitems
             "Iron Man"
             ,"The invincible Iron Man"
             ,"https://comicvine.gamespot.com/a/uploads/original/11174/111743204/8923866-ironman.jpg"
-        ),
-            MarvelChars(
-                1,
-                "Iron Man"
-                ,"The invincible Iron Man"
-                ,"https://comicvine.gamespot.com/a/uploads/original/11174/111743204/8923866-ironman.jpg"
+
             ),MarvelChars(
                 2,
                 "Wolverine"
@@ -38,6 +33,6 @@ class Listitems
                 ,"The incredible hulk(1968)"
                 ,"https://comicvine.gamespot.com/a/uploads/scale_small/12/124259/7892286-immortal_hulk_vol_1_38_.jpg"
             ))
-return items
+        return items
     }
 }

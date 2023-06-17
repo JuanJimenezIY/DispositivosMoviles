@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.MarvelCharactersBinding
 import com.example.dispositivos.ui.utilities.MarvelChars
+import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 
 class MarvelAdapter(private val items: List<MarvelChars>):RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
     class MarvelViewHolder(view: View) :RecyclerView.ViewHolder(view){
@@ -16,6 +18,14 @@ class MarvelAdapter(private val items: List<MarvelChars>):RecyclerView.Adapter<M
          fun render(item:MarvelChars){
              binding.txtTitulo.text = item.name
              binding.txtComic.text=item.comic
+             Picasso.get().load(item.image).into(binding.imagenMarvel)
+
+             binding.imagenMarvel.setOnClickListener{
+                 Snackbar.make(binding.imagenMarvel,
+                 item.name,
+                 Snackbar.LENGTH_SHORT)
+                 .show()
+             }
          }
     }
 
