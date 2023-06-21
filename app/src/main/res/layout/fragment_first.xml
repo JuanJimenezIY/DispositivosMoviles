@@ -65,7 +65,15 @@
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner">
+        app:layout_constraintTop_toBottomOf="@id/spinner"
+
+        >
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/rvSwipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMarvelChars"
@@ -77,5 +85,6 @@
             app:layout_constraintTop_toTopOf="parent"
 
             />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

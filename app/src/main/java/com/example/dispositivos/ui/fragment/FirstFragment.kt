@@ -1,5 +1,6 @@
 package com.example.dispositivos.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.logic.lists.ListItems
+import com.example.dispositivos.ui.activities.DetailsMarvelItem
+import com.example.dispositivos.ui.activities.MainActivity
 import com.example.dispositivos.ui.adapters.MarvelAdapter
+import com.example.dispositivos.ui.utilities.MarvelChars
 
 /**
  * A simple [Fragment] subclass.
@@ -45,18 +49,34 @@ class FirstFragment : Fragment() {
         binding.spinner.adapter= adapter
        // binding.listView.adapter = adapter
 
-        val rvAdapter= MarvelAdapter(ListItems().returnMarvelChar())
-        val rvMarvel =binding.rvMarvelChars
-        rvMarvel.adapter=rvAdapter
-        rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
-        )
+        binding.rvSwipe.setOnRefreshListener {
+            chargeDataRV()
+            binding.rvSwipe.isRefreshing=false
+        }
 
 
     }
 
+    //se va a aenviar como parametro en el adaptador
+    fun sendMarvelItems(item: MarvelChars){
+
+        val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
+        i.putExtra("name",item)
+        startActivity(i)
+    }
 
 
+    fun chargeDataRV(){
+        val rvAdapter= MarvelAdapter(
+            ListItems().returnMarvelChar(),
 
+            ){sendMarvelItems(it)}
+
+        val rvMarvel =binding.rvMarvelChars
+        rvMarvel.adapter=rvAdapter
+        rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
+        )
+    }
 
 }
 

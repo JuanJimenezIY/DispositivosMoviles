@@ -1,7 +1,12 @@
 package com.example.dispositivos.ui.utilities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class MarvelChars (     val id: Int,
                              val name: String,
                              val comic: String,
-                             val image: String)
+                             val image: String
+                             ):Parcelable
 

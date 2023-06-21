@@ -9,7 +9,7 @@ class ListItems
         val items= listOf(MarvelChars(
             1,
             "Iron Man"
-            ,"The invincible Iron Man"
+            ,"The invincible Iron Man (1968)"
             ,"https://comicvine.gamespot.com/a/uploads/original/11174/111743204/8923866-ironman.jpg"
 
             ),MarvelChars(
