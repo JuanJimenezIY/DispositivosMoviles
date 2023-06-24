@@ -7,14 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dispositivos.R
 import com.example.dispositivos.databinding.FragmentFirstBinding
+import com.example.dispositivos.logic.jikanLogic.JikanAnimeLogic
 import com.example.dispositivos.logic.lists.ListItems
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
 import com.example.dispositivos.ui.activities.MainActivity
 import com.example.dispositivos.ui.adapters.MarvelAdapter
 import com.example.dispositivos.ui.utilities.MarvelChars
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -31,51 +36,67 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentFirstBinding.inflate(layoutInflater
-            ,container,
-            false)
+        binding = FragmentFirstBinding.inflate(
+            layoutInflater, container,
+            false
+        )
 
-        return  binding.root
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        val names= arrayListOf<String>("Carlos","Juan","Xavier","Andres","Pepe","Antonio")
+        val names = arrayListOf<String>("Carlos", "Juan", "Xavier", "Andres", "Pepe", "Antonio")
 
-        val adapter= ArrayAdapter<String>(
-            requireActivity(),R.layout.simple_spinner,names)
+        val adapter = ArrayAdapter<String>(
+            requireActivity(), R.layout.simple_spinner, names
+        )
 
 
-        binding.spinner.adapter= adapter
-       // binding.listView.adapter = adapter
+        binding.spinner.adapter = adapter
+        // binding.listView.adapter = adapter
 
         binding.rvSwipe.setOnRefreshListener {
             chargeDataRV()
-            binding.rvSwipe.isRefreshing=false
+            binding.rvSwipe.isRefreshing = false
         }
 
 
     }
 
     //se va a aenviar como parametro en el adaptador
-    fun sendMarvelItems(item: MarvelChars){
+
+    fun sendMarvelItems(item: MarvelChars) {
 
         val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
-        i.putExtra("name",item)
+        i.putExtra("name", item)
         startActivity(i)
     }
 
 
-    fun chargeDataRV(){
-        val rvAdapter= MarvelAdapter(
-            ListItems().returnMarvelChar(),
+    fun chargeDataRV() {
 
-            ){sendMarvelItems(it)}
+        lifecycleScope.launch(Dispatchers.IO) {
+            val rvAdapter = MarvelAdapter(
 
-        val rvMarvel =binding.rvMarvelChars
-        rvMarvel.adapter=rvAdapter
-        rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
-        )
+                JikanAnimeLogic().getAllAnimes()
+                // ListItems().returnMarvelChar()
+
+            ) { sendMarvelItems(it) }
+
+
+            withContext(Dispatchers.Main) {
+
+                with(binding.rvMarvelChars){
+                    this.adapter = rvAdapter
+                    this.layoutManager = LinearLayoutManager(
+                        requireActivity(), LinearLayoutManager.VERTICAL, false
+                    )
+                }
+
+
+            }
+        }
     }
 
 }
