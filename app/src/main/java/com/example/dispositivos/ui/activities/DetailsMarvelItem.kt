@@ -34,6 +34,7 @@ class DetailsMarvelItem : AppCompatActivity() {
         if (item!= null){
             binding.textoCentrado.text=item.name
             binding.txtComic.text=item.comic
+            binding.descripcion.text=item.descr
 
             Picasso.get().load(item.image).into(binding.imgPersonaje)
         }

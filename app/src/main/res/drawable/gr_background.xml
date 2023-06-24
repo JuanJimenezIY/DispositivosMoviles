@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item>
         <shape>
             <gradient android:angle="90"
-                android:startColor="@color/fondo_marvel"
-                android:endColor="@color/fondo_marvel"
-
-                android:centerColor="#000000"
+                android:startColor="#272626"
+                android:endColor="#692525"
                 android:type="linear"/>
 
         </shape>

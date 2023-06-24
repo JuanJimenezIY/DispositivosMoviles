@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/principal_color_ej"
+    android:background="@color/fondo_marvel"
     android:orientation="vertical"
 
     tools:context=".ui.fragment.FirstFragment">
@@ -19,6 +19,7 @@
         android:layout_margin="35dp"
         app:cardCornerRadius="12dp"
 
+android:backgroundTint="@color/background_dm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,19 +29,20 @@
         >
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="193dp"
+            android:layout_height="205dp"
 
-            android:src="@drawable/chatgpt"
+            android:src="@drawable/marvel_chars_2"
 />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"
-            android:gravity="bottom|center"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:fontFamily="@font/poppins"
+            android:gravity="bottom|center"
+            android:text="@string/hello_blank_fragment"
+
+            android:textSize="30sp"
+            android:textStyle="bold"
 
             />
     </androidx.cardview.widget.CardView>
@@ -50,8 +52,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:layout_marginTop="124dp"
-        android:background="@color/white"
+
+        android:layout_marginTop="8dp"
+        android:background="@color/background_dm"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -60,31 +63,30 @@
     <LinearLayout
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_margin="25dp"
-        android:background="@color/white"
+
+        android:background="@color/background_dm"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner"
 
-        >
-
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="0.0">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/rvSwipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMarvelChars"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMarvelChars"
 
-            />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

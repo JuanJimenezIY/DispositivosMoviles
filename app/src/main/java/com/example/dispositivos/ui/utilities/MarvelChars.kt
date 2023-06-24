@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class MarvelChars (     val id: Int,
                              val name: String,
                              val comic: String,
-                             val image: String
+                             val image: String,
+                             val descr: String
                              ):Parcelable
 
