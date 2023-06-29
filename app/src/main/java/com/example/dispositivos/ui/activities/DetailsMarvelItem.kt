@@ -4,9 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dispositivos.R
+import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
 import com.example.dispositivos.databinding.ActivityDetailsMarvelItemBinding
 import com.example.dispositivos.databinding.MarvelCharactersBinding
-import com.example.dispositivos.ui.utilities.MarvelChars
+
 import com.squareup.picasso.Picasso
 
 class DetailsMarvelItem : AppCompatActivity() {
@@ -34,9 +35,8 @@ class DetailsMarvelItem : AppCompatActivity() {
         if (item!= null){
             binding.textoCentrado.text=item.name
             binding.txtComic.text=item.comic
-            binding.descripcion.text=item.descr
-
             Picasso.get().load(item.image).into(binding.imgPersonaje)
+            binding.descripcion.text=item.desc
         }
     }
 }

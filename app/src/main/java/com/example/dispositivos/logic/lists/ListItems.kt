@@ -1,6 +1,7 @@
 package com.example.dispositivos.logic.lists
 
-import com.example.dispositivos.ui.utilities.MarvelChars
+import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+
 
 class ListItems
 
@@ -31,13 +32,14 @@ class ListItems
                 ,"Captain America (1968)"
                 ,"https://comicvine.gamespot.com/a/uploads/scale_small/12/124259/8459983-rco031_1650495781.jpg"
                 ,"El Capitán América, cuyo nombre real es Steven  Grant Rogers, es un superhéroe ficticio que aparece en los cómics estadounidenses publicados por Marvel Comics."
-            ),MarvelChars(
+            ), MarvelChars(
                 5,
                 "Hulk"
                 ,"The incredible hulk(1968)"
                 ,"https://comicvine.gamespot.com/a/uploads/scale_small/12/124259/7892286-immortal_hulk_vol_1_38_.jpg"
                 ,"Hulk (llamado Hulk o El Hombre Increíble en muchas de las traducciones al español) es un personaje ficticio, un superhéroe que aparece en los cómics estadounidenses publicados por la editorial Marvel Comics, es considerado el personaje más fuerte de Marvel Comics."
-            ))
+            )
+        )
         return items
     }
 }

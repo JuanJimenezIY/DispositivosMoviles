@@ -10,13 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dispositivos.R
+import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
 import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.logic.jikanLogic.JikanAnimeLogic
 import com.example.dispositivos.logic.lists.ListItems
+import com.example.dispositivos.logic.marvelLogic.MarvelLogic
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
 import com.example.dispositivos.ui.activities.MainActivity
 import com.example.dispositivos.ui.adapters.MarvelAdapter
-import com.example.dispositivos.ui.utilities.MarvelChars
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -79,9 +81,10 @@ class FirstFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val rvAdapter = MarvelAdapter(
 
-                JikanAnimeLogic().getAllAnimes()
+                MarvelLogic().getAllCharacters("a" +
+                        "",10)
                 // ListItems().returnMarvelChar()
-
+                        //JikanAnimeLogic().getAllAnimes()
             ) { sendMarvelItems(it) }
 
 

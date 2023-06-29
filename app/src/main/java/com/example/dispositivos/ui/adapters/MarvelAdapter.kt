@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos.R
+import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
 import com.example.dispositivos.databinding.MarvelCharactersBinding
-import com.example.dispositivos.ui.utilities.MarvelChars
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
