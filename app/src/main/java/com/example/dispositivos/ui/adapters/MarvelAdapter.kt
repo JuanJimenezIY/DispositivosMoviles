@@ -11,11 +11,15 @@ import com.example.dispositivos.databinding.MarvelCharactersBinding
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
-class MarvelAdapter(private val items: List<MarvelChars>,
+class MarvelAdapter(
+
+
                     private var fnClick:(MarvelChars) -> Unit
 ):
 
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
+
+     var items: List<MarvelChars> = listOf()
     class MarvelViewHolder(view: View) :RecyclerView.ViewHolder(view){
         private val binding:MarvelCharactersBinding= MarvelCharactersBinding.bind(view)
 
@@ -58,4 +62,9 @@ class MarvelAdapter(private val items: List<MarvelChars>,
 
     override fun getItemCount(): Int =items.size
 
+    fun updateListItems(newItems: List<MarvelChars>){
+        this.items =this.items.plus(newItems)
+        notifyDataSetChanged()
+
+    }
 }
