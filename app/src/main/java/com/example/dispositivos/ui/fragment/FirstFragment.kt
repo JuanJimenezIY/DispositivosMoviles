@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,8 @@ class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
     private lateinit var lmanager: LinearLayoutManager
+
+    private lateinit var marvelCharacterItems: MutableList<MarvelChars>
     private  var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,6 +96,15 @@ class FirstFragment : Fragment() {
                 }
 
         })
+        binding.txtfilter.addTextChangedListener{filteredText->
+            val newItems= marvelCharacterItems.filter {
+                items->
+                items.name.contains(filteredText.toString())
+
+            }
+
+            rvAdapter.replaceListAdapter(newItems)
+        }
 
     }
 
@@ -108,19 +120,25 @@ class FirstFragment : Fragment() {
 
     fun chargeDataRV(search :String) {
 
+
         lifecycleScope.launch(Dispatchers.IO) {
+
+            var marvelCharacterItems=MarvelLogic().getAllCharacters(
+                "Spider",5
+            )
              rvAdapter.items =
 
 
                  JikanAnimeLogic().getAllAnimes()
                  // MarvelLogic().getAllCharacters(name=search ,5)
 
-                // ListItems().returnMarvelChar()
+                 //ListItems().returnMarvelChar()
                      /*   JikanAnimeLogic().getAllAnimes()
             ) { sendMarvelItems(it) }
 
 */
             withContext(Dispatchers.Main) {
+
 
                 with(binding.rvMarvelChars){
                     this.adapter = rvAdapter
