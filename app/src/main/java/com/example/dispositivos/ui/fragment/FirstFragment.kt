@@ -12,13 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos.R
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.logic.jikanLogic.JikanAnimeLogic
-import com.example.dispositivos.logic.lists.ListItems
-import com.example.dispositivos.logic.marvelLogic.MarvelLogic
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
-import com.example.dispositivos.ui.activities.MainActivity
 import com.example.dispositivos.ui.adapters.MarvelAdapter
 
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +33,8 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
     private lateinit var lmanager: LinearLayoutManager
 
-    private lateinit var marvelCharacterItems: MutableList<MarvelChars>
+    private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
+
     private  var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +64,7 @@ class FirstFragment : Fragment() {
         // binding.listView.adapter = adapter
 
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV("cap")
+            chargeDataRV()
             binding.rvSwipe.isRefreshing = false
         }
         binding.rvMarvelChars.addOnScrollListener(
@@ -99,7 +97,7 @@ class FirstFragment : Fragment() {
         binding.txtfilter.addTextChangedListener{filteredText->
             val newItems= marvelCharacterItems.filter {
                 items->
-                items.name.contains(filteredText.toString())
+                items.name.lowercase(). contains(filteredText.toString().lowercase())
 
             }
 
@@ -118,14 +116,17 @@ class FirstFragment : Fragment() {
     }
 
 
-    fun chargeDataRV(search :String) {
+    private fun chargeDataRV() {
 
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.Main) {
+             marvelCharacterItems= withContext(Dispatchers.IO){
+                 return@withContext (JikanAnimeLogic().getAllAnimes (
 
-            var marvelCharacterItems=MarvelLogic().getAllCharacters(
-                "Spider",5
-            )
+
+                 ))
+             } as MutableList<MarvelChars>
+
              rvAdapter.items =
 
 
@@ -137,16 +138,16 @@ class FirstFragment : Fragment() {
             ) { sendMarvelItems(it) }
 
 */
-            withContext(Dispatchers.Main) {
 
 
-                with(binding.rvMarvelChars){
+
+                binding.rvMarvelChars.apply{
                     this.adapter = rvAdapter
                     this.layoutManager = lmanager
                 }
 
 
-            }
+
         }
     }
 

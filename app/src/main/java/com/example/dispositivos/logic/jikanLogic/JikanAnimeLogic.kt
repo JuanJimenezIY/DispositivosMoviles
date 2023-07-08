@@ -2,7 +2,7 @@ package com.example.dispositivos.logic.jikanLogic
 
 import com.example.dispositivos.data.connections.ApiConnection
 import com.example.dispositivos.data.endpoints.JikanEndpoint
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 
 
 class JikanAnimeLogic {

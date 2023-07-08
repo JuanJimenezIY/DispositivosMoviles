@@ -1,32 +1,33 @@
 package com.example.dispositivos.logic.lists
 
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 
 
 class ListItems
 
 {
     fun returnMarvelChar():List<MarvelChars>{
-        val items= listOf(MarvelChars(
+        val items= listOf(
+            MarvelChars(
             1,
             "Iron Man"
             ,"The invincible Iron Man (1968)"
             ,"https://comicvine.gamespot.com/a/uploads/original/11174/111743204/8923866-ironman.jpg"
             ,"Iron Man (conocido en español como el Hombre de Hierro) es un superhéroe que aparece en los cómics estadounidenses publicados por Marvel Comics, nacido en Sofía, Bulgaria. "
 
-            ),MarvelChars(
+            ), MarvelChars(
                 2,
                 "Wolverine"
                 ,"Wolverine (1989)"
                 ,"https://comicvine.gamespot.com/a/uploads/scale_small/5/57023/7469590-wolverinerb.jpg"
                 ,"Wolverine, cuyo nombre de nacimiento es James Howlett (también conocido como James Logan o simplemente Logan) es un superhéroe ficticio que aparece en los cómics publicados por Marvel Comics"
-            ),MarvelChars(
+            ), MarvelChars(
                 3,
                 "SpiderMan"
                 ,"The amazing spiderman (1962)"
                 ,"https://comicvine.gamespot.com/a/uploads/scale_small/12/124259/8126579-amazing_spider-man_vol_5_54_stormbreakers_variant_textless.jpg"
                 ,"Spider-Man, traducido en ocasiones como el Hombre Araña, es un personaje creado por los estadounidenses Stan Lee y Steve Ditko, e introducido en el cómic Amazing Fantasy n.° 15, publicado por Marvel Comics en agosto de 1962."
-            ),MarvelChars(
+            ), MarvelChars(
                 4,
                 "Capitan America"
                 ,"Captain America (1968)"

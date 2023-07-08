@@ -1,14 +1,12 @@
 package com.example.dispositivos.ui.adapters
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos.R
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 import com.example.dispositivos.databinding.MarvelCharactersBinding
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class MarvelAdapter(

@@ -1,4 +1,4 @@
-package com.example.dispositivos.data.entities.marvel.characters
+package com.example.dispositivos.logic.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

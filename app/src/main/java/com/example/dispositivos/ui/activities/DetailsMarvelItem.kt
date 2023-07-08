@@ -1,12 +1,9 @@
 package com.example.dispositivos.ui.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.dispositivos.R
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 import com.example.dispositivos.databinding.ActivityDetailsMarvelItemBinding
-import com.example.dispositivos.databinding.MarvelCharactersBinding
 
 import com.squareup.picasso.Picasso
 

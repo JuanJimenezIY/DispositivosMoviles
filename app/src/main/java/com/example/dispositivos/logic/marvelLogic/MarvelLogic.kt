@@ -3,7 +3,7 @@ package com.example.dispositivos.logic.marvelLogic
 import android.util.Log
 import com.example.dispositivos.data.connections.ApiConnection
 import com.example.dispositivos.data.endpoints.MarvelEndpoint
-import com.example.dispositivos.data.entities.marvel.characters.MarvelChars
+import com.example.dispositivos.logic.data.MarvelChars
 
 class MarvelLogic {
     suspend fun getAllCharacters(name:String,limit:Int):List<MarvelChars>{

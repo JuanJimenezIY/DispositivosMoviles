@@ -1,7 +1,7 @@
 package com.example.dispositivos.data.endpoints
 
 
-import com.example.dispositivos.data.entities.marvel.data.MarvelApiChars
+import com.example.dispositivos.data.entities.marvel.characters.data.MarvelApiChars
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
