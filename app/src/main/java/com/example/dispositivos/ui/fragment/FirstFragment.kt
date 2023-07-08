@@ -9,12 +9,14 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos.R
 import com.example.dispositivos.logic.data.MarvelChars
 import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.logic.jikanLogic.JikanAnimeLogic
+import com.example.dispositivos.logic.marvelLogic.MarvelLogic
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
 import com.example.dispositivos.ui.adapters.MarvelAdapter
 
@@ -32,6 +34,7 @@ class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
     private lateinit var lmanager: LinearLayoutManager
+    private lateinit var gmanager: GridLayoutManager
 
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
 
@@ -47,6 +50,9 @@ class FirstFragment : Fragment() {
         )
         lmanager =LinearLayoutManager(
             requireActivity(), LinearLayoutManager.VERTICAL, false
+        )
+        gmanager= GridLayoutManager(
+            requireActivity(),2
         )
         return binding.root
     }
@@ -79,12 +85,12 @@ class FirstFragment : Fragment() {
 
                         if((v+p)>=t){
                             lifecycleScope.launch((Dispatchers.IO)){
-                                val newItems=JikanAnimeLogic().getAllAnimes()
+                                val items=MarvelLogic().getAllMarvelChars(0,99)
                                /* val newItems = MarvelLogic().getAllCharacters(
                                     name="cap" ,
                                     5)*/
                                 withContext(Dispatchers.Main){
-                                    rvAdapter.updateListItems(newItems)
+                                    rvAdapter.updateListItems(items)
                                 }
 
                             }
@@ -121,7 +127,7 @@ class FirstFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.Main) {
              marvelCharacterItems= withContext(Dispatchers.IO){
-                 return@withContext (JikanAnimeLogic().getAllAnimes (
+                 return@withContext (MarvelLogic().getAllMarvelChars (0,99
 
 
                  ))
@@ -130,8 +136,8 @@ class FirstFragment : Fragment() {
              rvAdapter.items =
 
 
-                 JikanAnimeLogic().getAllAnimes()
-                 // MarvelLogic().getAllCharacters(name=search ,5)
+                 //JikanAnimeLogic().getAllAnimes()
+                  MarvelLogic().getAllMarvelChars(0 ,99)
 
                  //ListItems().returnMarvelChar()
                      /*   JikanAnimeLogic().getAllAnimes()
@@ -143,7 +149,8 @@ class FirstFragment : Fragment() {
 
                 binding.rvMarvelChars.apply{
                     this.adapter = rvAdapter
-                    this.layoutManager = lmanager
+                  //  this.layoutManager = lmanager
+                    this.layoutManager = gmanager
                 }
 
 

@@ -16,4 +16,6 @@ interface MarvelCharsDao {
 
     @Insert
     fun insertMarvelChar(ch : List<MarvelCharsDao>)
+
+
 }
