@@ -6,6 +6,9 @@
     <string name="menu_apis">Apis</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Personajes Marvel</string>
+
+
     <string name="second_fragment">Segundo Fragment</string>
+    <string name="titulo_second_fragment">Busqueda Marvel</string>
     <string name="third_fragment">Tercer Fragment</string>
 </resources>

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:elevation="10dp"
-        android:layout_margin="35dp"
+        android:layout_margin="25dp"
         app:cardCornerRadius="12dp"
 
 android:backgroundTint="@color/background_dm"
@@ -30,7 +30,7 @@ android:backgroundTint="@color/background_dm"
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="205dp"
-
+            android:scaleType="fitXY"
             android:src="@drawable/marvel_chars_2"
 />
 
@@ -63,11 +63,11 @@ android:backgroundTint="@color/background_dm"
     <LinearLayout
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="375dp"
         android:layout_margin="25dp"
 
         android:orientation="vertical"
-        android:background="@color/background_dm"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,8 +78,9 @@ android:backgroundTint="@color/background_dm"
         <EditText
             android:id="@+id/txtfilter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:textColor="@color/white"
+            android:background="@color/background_dm"
             android:textSize="14sp"
             android:maxLines="1"
             android:singleLine="true"

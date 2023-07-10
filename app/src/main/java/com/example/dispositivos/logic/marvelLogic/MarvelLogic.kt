@@ -18,20 +18,10 @@ class MarvelLogic {
 
             if (response.isSuccessful){
                 response.body()!!.data.results.forEach{
-                    var comic:String=""
-                    if(it.comics.items.size>0){
-                        comic=it.comics.items[0].name
-                    }
-                    val m= MarvelChars(
-                        it.id,
-                        it.name,
-                        comic,
-                        it.thumbnail.path+"."+it.thumbnail.extension,
-                        it.description
-
-
-                    )
+                    val m= it.getMarvelChars()
                     itemList.add(m)
+
+
                 }
             }
             else{

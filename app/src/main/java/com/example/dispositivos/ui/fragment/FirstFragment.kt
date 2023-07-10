@@ -1,5 +1,6 @@
 package com.example.dispositivos.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -68,7 +69,7 @@ class FirstFragment : Fragment() {
 
         binding.spinner.adapter = adapter
         // binding.listView.adapter = adapter
-
+        chargeDataRV()
         binding.rvSwipe.setOnRefreshListener {
             chargeDataRV()
             binding.rvSwipe.isRefreshing = false
@@ -85,12 +86,12 @@ class FirstFragment : Fragment() {
 
                         if((v+p)>=t){
                             lifecycleScope.launch((Dispatchers.IO)){
-                                val items=MarvelLogic().getAllMarvelChars(0,99)
-                               /* val newItems = MarvelLogic().getAllCharacters(
-                                    name="cap" ,
-                                    5)*/
+                                //val items=MarvelLogic().getAllMarvelChars(0,99)
+                                val newItems = MarvelLogic().getAllCharacters(
+                                    name="spider" ,
+                                    10)
                                 withContext(Dispatchers.Main){
-                                    rvAdapter.updateListItems(items)
+                                    rvAdapter.updateListItems(newItems)
                                 }
 
                             }
@@ -122,35 +123,26 @@ class FirstFragment : Fragment() {
     }
 
 
+
     private fun chargeDataRV() {
-
-
         lifecycleScope.launch(Dispatchers.Main) {
              marvelCharacterItems= withContext(Dispatchers.IO){
-                 return@withContext (MarvelLogic().getAllMarvelChars (0,99
-
-
+                 return@withContext (MarvelLogic().getAllCharacters (name="spider" ,
+                     10
                  ))
              } as MutableList<MarvelChars>
-
              rvAdapter.items =
-
-
                  //JikanAnimeLogic().getAllAnimes()
-                  MarvelLogic().getAllMarvelChars(0 ,99)
-
+                  MarvelLogic().getAllCharacters(name="spider" ,
+                      10)
                  //ListItems().returnMarvelChar()
                      /*   JikanAnimeLogic().getAllAnimes()
             ) { sendMarvelItems(it) }
 
-*/
-
-
-
-                binding.rvMarvelChars.apply{
+*/           binding.rvMarvelChars.apply{
                     this.adapter = rvAdapter
                   //  this.layoutManager = lmanager
-                    this.layoutManager = gmanager
+                    this.layoutManager = lmanager
                 }
 
 

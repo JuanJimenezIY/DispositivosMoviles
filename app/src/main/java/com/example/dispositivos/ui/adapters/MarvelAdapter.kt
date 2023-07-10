@@ -59,7 +59,7 @@ class MarvelAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: MarvelAdapter.MarvelViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MarvelViewHolder, position: Int) {
         holder.render(items[position], fnClick)
     }
 
