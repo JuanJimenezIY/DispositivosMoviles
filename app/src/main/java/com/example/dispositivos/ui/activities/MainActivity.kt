@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dispositivos.databinding.ActivityMainBinding
 import com.example.dispositivos.logic.validator.LoginValidator
+import com.example.dispositivos.ui.utilities.Dispositivos
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         initClass()
+
+
     }
     override fun onDestroy() {
         super.onDestroy()

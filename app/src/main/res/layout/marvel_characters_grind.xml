@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="25dp"
+        android:backgroundTint="@color/black"
         app:cardElevation="10dp"
         app:cardCornerRadius="12dp"
 
@@ -27,7 +28,7 @@
 
             <ImageView
                 android:id="@+id/imagenMarvel"
-                android:layout_width="match_parent"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"

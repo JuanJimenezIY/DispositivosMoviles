@@ -20,6 +20,7 @@ import com.example.dispositivos.logic.jikanLogic.JikanAnimeLogic
 import com.example.dispositivos.logic.marvelLogic.MarvelLogic
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
 import com.example.dispositivos.ui.adapters.MarvelAdapter
+import com.example.dispositivos.ui.utilities.Dispositivos
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -69,9 +70,9 @@ class FirstFragment : Fragment() {
 
         binding.spinner.adapter = adapter
         // binding.listView.adapter = adapter
-        chargeDataRV()
+        chargeDataRVDB()
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV()
+            chargeDataRVDB()
             binding.rvSwipe.isRefreshing = false
         }
         binding.rvMarvelChars.addOnScrollListener(
@@ -144,6 +145,43 @@ class FirstFragment : Fragment() {
                   //  this.layoutManager = lmanager
                     this.layoutManager = lmanager
                 }
+
+
+
+        }
+    }
+
+    private fun chargeDataRVDB() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            marvelCharacterItems= withContext(Dispatchers.IO){
+                var marvelCharsItems=
+                    MarvelLogic().getAllCharactersDB().toMutableList()
+
+
+            if (marvelCharsItems.isEmpty()) {
+                marvelCharacterItems = (MarvelLogic().getAllCharacters(
+                        name = "spider",
+                        10
+                    ).toMutableList())
+                MarvelLogic().insertMarvelCharstoDB(marvelCharacterItems)
+                }
+                return@withContext marvelCharsItems
+            }
+
+
+
+            rvAdapter.items =marvelCharacterItems
+                    //JikanAnimeLogic().getAllAnimes()
+               // MarvelLogic().getAllCharactersDB()
+            //ListItems().returnMarvelChar()
+            /*   JikanAnimeLogic().getAllAnimes()
+   ) { sendMarvelItems(it) }
+
+*/           binding.rvMarvelChars.apply{
+            this.adapter = rvAdapter
+            //  this.layoutManager = lmanager
+            this.layoutManager = lmanager
+        }
 
 
 

@@ -104,6 +104,7 @@ class SecondFragment : Fragment() {
             }
 
             rvAdapter.replaceListAdapter(newItems)
+
         }
 
     }

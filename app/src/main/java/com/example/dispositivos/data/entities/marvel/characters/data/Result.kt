@@ -1,5 +1,6 @@
 package com.example.dispositivos.data.entities.marvel.characters.data
 
+import com.example.dispositivos.data.entities.marvel.characters.data.database.MarvelCharsDB
 import com.example.dispositivos.logic.data.MarvelChars
 
 data class Result(
@@ -16,7 +17,7 @@ data class Result(
     val urls: List<Url>
 )
 
-fun Result.getMarvelChars():MarvelChars{
+fun Result.getMarvelChars(): MarvelChars {
 
     var comic:String=""
     if(comics.items.isNotEmpty()){
