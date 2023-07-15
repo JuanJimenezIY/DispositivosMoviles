@@ -3,12 +3,12 @@
     <string name="name_banner">Pedidos Online</string>
     <string name="menu_inicio">Inicio</string>
     <string name="menu_favoritos">Favoritos</string>
-    <string name="menu_apis">Apis</string>
+    <string name="menu_busqueda">Busqueda</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Personajes Marvel</string>
 
 
     <string name="second_fragment">Segundo Fragment</string>
     <string name="titulo_second_fragment">Busqueda Marvel</string>
-    <string name="third_fragment">Tercer Fragment</string>
+    <string name="third_fragment">Favoritos</string>
 </resources>

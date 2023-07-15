@@ -9,15 +9,15 @@
         android:enabled="true"
         android:visible="true"/>
     <item
-        android:id="@+id/favoritos"
-        android:icon="@drawable/baseline_star_24"
-        android:title="@string/menu_favoritos"
+        android:id="@+id/busqueda"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/menu_busqueda"
         android:enabled="true"
         />
     <item
-        android:id="@+id/apis"
-        android:title="@string/menu_apis"
-        android:icon="@drawable/baseline_landscape_24"
+        android:id="@+id/favoritos"
+        android:title="@string/menu_favoritos"
+        android:icon="@drawable/baseline_star_24"
         android:enabled="true"
         android:visible="true"/>
 </menu>

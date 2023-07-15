@@ -25,29 +25,30 @@ class EmptyActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
- //       var name:String=""
-//        intent.extras.let {
-//            // it.toString()
-//             name= it?.getString("var2")!!
-//        }
-//        Log.d("UCE","Hola${name}")
-//        binding.textView.text="Bienvenido "+name.toString()
-//        Log.d("UCE","Entrando a Start")
+        /*
+        var name:String=""
+        intent.extras.let {
+            // it.toString()
+            name= it?.getString("var2")!!
+        }
+        Log.d("UCE","Hola${name}")
+        binding.textView.text="Bienvenido "+name.toString()
+       Log.d("UCE","Entrando a Start")*/
 
         initClass()
     }
     private fun initClass(){
 
-
+/*
         binding.button1.setOnClickListener{
-            /*
+
             var f = Snackbar.make(
                 binding.button1,
                 "EmptyActivity",
                 Snackbar.LENGTH_SHORT
             )
                 .show()
-                */
+
 
             var intent = Intent(this,MainActivity::class.java
             )
@@ -58,7 +59,7 @@ class EmptyActivity : AppCompatActivity() {
 
 
         }
-
+*/
 
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -70,7 +71,7 @@ class EmptyActivity : AppCompatActivity() {
                )
                     true
                 }
-                R.id.favoritos -> {
+                R.id.busqueda -> {
                     // Respond to navigation item 2 click
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,binding.frmContainer.id,SecondFragment()
@@ -78,7 +79,7 @@ class EmptyActivity : AppCompatActivity() {
 
                     true
                 }
-                R.id.apis -> {
+                R.id.favoritos -> {
                     // Respond to navigation item 2 click
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,binding.frmContainer.id,ThirdFragment()

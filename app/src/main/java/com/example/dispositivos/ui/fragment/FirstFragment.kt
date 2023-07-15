@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,12 +22,17 @@ import com.example.dispositivos.databinding.FragmentFirstBinding
 import com.example.dispositivos.logic.data.getMarvelCharsDB
 import com.example.dispositivos.logic.marvelLogic.MarvelLogic
 import com.example.dispositivos.ui.activities.DetailsMarvelItem
+import com.example.dispositivos.ui.activities.dataStore
 import com.example.dispositivos.ui.adapters.MarvelAdapter
+import com.example.dispositivos.ui.data.UserDataStore
 import com.example.dispositivos.ui.utilities.Dispositivos
 import com.example.dispositivos.ui.utilities.Metodos
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -67,6 +74,16 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        lifecycleScope.launch(Dispatchers.Main){
+            getDataStore().collect(){
+                user->
+                Log.d("UCE",user.name)
+                Log.d("UCE",user.email)
+                Log.d("UCE",user.session)
+            }
+        }
+
         val names = arrayListOf<String>("Carlos", "Juan", "Xavier", "Andres", "Pepe", "Antonio")
 
         val adapter = ArrayAdapter<String>(
@@ -78,7 +95,7 @@ class FirstFragment : Fragment() {
         // binding.listView.adapter = adapter
 
        //chargeDataRVDB(limit,offset)
-        chargeDataRV(limit,offset)
+       // chargeDataRV(limit,offset)
         binding.rvSwipe.setOnRefreshListener {
           //  chargeDataRVDB(limit,offset)
            chargeDataRV(limit,offset)
@@ -217,7 +234,19 @@ return true
             this@FirstFragment.offset+=limit
     }
 
-    }}
+    }
+    private fun getDataStore()=
+
+        requireActivity().dataStore.data.map {
+            prefs->
+        UserDataStore(
+            name=prefs[stringPreferencesKey("usuario")].orEmpty(),
+            email=prefs[stringPreferencesKey("email")].orEmpty(),
+            session=prefs[stringPreferencesKey("session")].orEmpty()
+        )
+
+    }
+}
 
 
 

@@ -1,13 +1,25 @@
 package com.example.dispositivos.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
 import com.example.dispositivos.databinding.ActivityMainBinding
 import com.example.dispositivos.logic.validator.LoginValidator
 import com.example.dispositivos.ui.utilities.Dispositivos
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.UUID
 
+// At the top level of your kotlin file:
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun initClass() {
         binding.btnLogin.setOnClickListener {
             //obtenemos la instancia de la clase
-            //val loginVal =LoginValidator()
+            val loginVal =LoginValidator()
             //acceod al metodo y le vincio los dos parametros que necsito
             val check= LoginValidator().checkLogin(
                 binding.txtName.text.toString(),
@@ -37,11 +49,18 @@ class MainActivity : AppCompatActivity() {
 
 
             if (check){
+
+                lifecycleScope.launch(Dispatchers.IO){
+                    saveDataStore( binding.txtName.text.toString())
+                }
+
+
+
                 //Intents
                 var intent =Intent(this,EmptyActivity::class.java
                 )
-                intent.putExtra("var1","UCE")
-                intent.putExtra("var2",binding.txtName.text.toString())
+               intent.putExtra("var1","UCE")
+               // intent.putExtra("var2",binding.txtName.text.toString())
                 startActivity(intent)
             }
             else{
@@ -86,8 +105,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
     }
 
+    private suspend fun  saveDataStore(stringData: String){
+        dataStore.edit {prefs->
+
+
+            prefs[stringPreferencesKey("usuario")]=   stringData
+            prefs[stringPreferencesKey("session")]=   UUID.randomUUID().toString()
+            prefs[stringPreferencesKey("email")]=   "dispositivos@gmail"
+
+        }
+    }
 
     /*
     setContentView(R.layout.activity_main)

@@ -107,6 +107,20 @@ class MarvelLogic {
 
     }
 
+    suspend fun favMarvelCharDB(item:MarvelChars){
+        var MarvelData=
+            MarvelCharsDB(
+                item.id,
+                item.name,
+                item.comic,
+                item.image,
+                item.desc
+            )
+        Dispositivos.getDbInstance().marvelDao().insertOneMarvelChar(MarvelData)
+    }
+
+
+
     suspend fun insertMarvelCharstoDB(items:List<MarvelChars>){
         var itemsDB = arrayListOf<MarvelCharsDB>()
         items.forEach {
