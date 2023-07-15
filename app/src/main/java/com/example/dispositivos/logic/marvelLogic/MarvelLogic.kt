@@ -10,6 +10,10 @@ import com.example.dispositivos.logic.data.MarvelChars
 import com.example.dispositivos.logic.data.getMarvelCharsDB
 
 import com.example.dispositivos.ui.utilities.Dispositivos
+import com.example.dispositivos.ui.utilities.Metodos
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.lang.RuntimeException
 
 class MarvelLogic {
     suspend fun getAllCharacters(name:String,limit:Int):List<MarvelChars>{
@@ -49,8 +53,6 @@ class MarvelLogic {
         if (call!=null){
             var response=call.getAllMarvelChars(offset,limit)
 
-            offset.toString()
-
             if (response.isSuccessful){
                 response.body()!!.data.results.forEach{
                    val m= it.getMarvelChars()
@@ -68,9 +70,7 @@ class MarvelLogic {
         return itemList
     }
 
-    suspend fun getAllCharactersDB():List<MarvelChars>{
-
-
+  fun getAllCharactersDB():List<MarvelChars>{
 
         var itemList= arrayListOf<MarvelChars>()
 
@@ -83,6 +83,30 @@ class MarvelLogic {
 
         return itemList
     }
+    suspend fun getAllCharsDB(offset:Int,limit: Int):MutableList<MarvelChars>{
+        var marvelCharsItems= mutableListOf<MarvelChars>()
+        try {
+              marvelCharsItems=
+                getAllCharactersDB().toMutableList()
+
+            if (marvelCharsItems.isEmpty()) {
+                marvelCharsItems = (MarvelLogic().getAllMarvelChars(
+                    offset,
+                    limit
+                ).toMutableList())
+                Log.d("Prueba",marvelCharsItems.size.toString())
+                insertMarvelCharstoDB(marvelCharsItems)
+
+            }
+            return marvelCharsItems
+        }catch (ex:Exception){
+            throw RuntimeException(ex.message)
+        }
+
+        Log.d("UUUU",marvelCharsItems.size.toString())
+
+    }
+
     suspend fun insertMarvelCharstoDB(items:List<MarvelChars>){
         var itemsDB = arrayListOf<MarvelCharsDB>()
         items.forEach {

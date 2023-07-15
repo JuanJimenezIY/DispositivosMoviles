@@ -12,7 +12,8 @@ import com.squareup.picasso.Picasso
 class MarvelAdapter(
 
 
-    private var fnClick: (MarvelChars) -> Unit
+    private var fnClick: (MarvelChars) -> Unit,
+  //  private var fnSave: (MarvelChars) -> Boolean
 ) :
 
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
@@ -24,7 +25,8 @@ class MarvelAdapter(
 
         fun render(
             item: MarvelChars,
-            fnClick: (MarvelChars) -> Unit
+            fnClick: (MarvelChars) -> Unit,
+           // fnSave: (MarvelChars) -> Boolean
         ) {
             binding.txtTitulo.text = item.name
             binding.txtComic.text = item.comic
@@ -34,7 +36,11 @@ class MarvelAdapter(
             itemView.setOnClickListener {
                 fnClick(item)
             }
-
+/*
+            binding.btnSave.setOnClickListener{
+                fnSave(item)
+            }
+*/
             binding.imagenMarvel.setOnClickListener {
                 fnClick(item)
 
@@ -49,7 +55,7 @@ class MarvelAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MarvelAdapter.MarvelViewHolder {
+    ): MarvelViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return MarvelViewHolder(
             inflater.inflate(
@@ -60,7 +66,7 @@ class MarvelAdapter(
     }
 
     override fun onBindViewHolder(holder: MarvelViewHolder, position: Int) {
-        holder.render(items[position], fnClick)
+        holder.render(items[position], fnClick /*,fnSave*/)
     }
 
     override fun getItemCount(): Int = items.size
