@@ -80,6 +80,7 @@ class FirstFragment : Fragment() {
                 user->
                 Log.d("UCE",user.name)
                 Log.d("UCE",user.email)
+
                 Log.d("UCE",user.session)
             }
         }
@@ -176,7 +177,7 @@ return true
             lifecycleScope.launch(Dispatchers.Main) {
                 marvelCharacterItems = withContext(Dispatchers.IO) {
                     return@withContext (MarvelLogic().getAllMarvelChars(
-                        offset,
+                        offset ,
                         limit
                     ) as MutableList<MarvelChars>)
                 }
@@ -207,6 +208,7 @@ return true
 
     private fun chargeDataRVDB(limit: Int,offset: Int) {
 
+        if (Metodos().isOnline(requireActivity())) {
 
         lifecycleScope.launch(Dispatchers.Main) {
             Log.d("DATOSNADA",marvelCharacterItems.size.toString())
@@ -232,18 +234,26 @@ return true
             this.layoutManager = lmanager
         }
             this@FirstFragment.offset+=limit
+        }
+        }else{
+            Snackbar.make(
+                binding.card,
+                "No hay conexión",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
-    }
+
     private fun getDataStore()=
-
         requireActivity().dataStore.data.map {
-            prefs->
-        UserDataStore(
-            name=prefs[stringPreferencesKey("usuario")].orEmpty(),
-            email=prefs[stringPreferencesKey("email")].orEmpty(),
-            session=prefs[stringPreferencesKey("session")].orEmpty()
-        )
+
+                prefs ->
+            UserDataStore(
+                name = prefs[stringPreferencesKey("usuario")].orEmpty(),
+                email = prefs[stringPreferencesKey("email")].orEmpty(),
+                session = prefs[stringPreferencesKey("session")].orEmpty()
+            )
 
     }
 }

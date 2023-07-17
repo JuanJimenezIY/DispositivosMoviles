@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:backgroundTint="#C4F4F4F4"
+        android:backgroundTint="@color/card_detail"
         app:cardCornerRadius="10dp"
 
         app:layout_constraintBottom_toTopOf="@id/texto_centrado"
@@ -90,6 +90,7 @@
             android:layout_marginEnd="36dp"
             android:layout_marginBottom="24dp"
 
+            android:backgroundTint="@color/background_ej"
             android:src="@drawable/baseline_favorite_24"
             app:fabSize="normal"
 

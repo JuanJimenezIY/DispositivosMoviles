@@ -25,7 +25,7 @@ class EmptyActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        /*
+/*
         var name:String=""
         intent.extras.let {
             // it.toString()
@@ -33,9 +33,12 @@ class EmptyActivity : AppCompatActivity() {
         }
         Log.d("UCE","Hola${name}")
         binding.textView.text="Bienvenido "+name.toString()
-       Log.d("UCE","Entrando a Start")*/
-
+        Log.d("UCE","Entrando a Start")
+*/
         initClass()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
     }
     private fun initClass(){
 
@@ -52,14 +55,14 @@ class EmptyActivity : AppCompatActivity() {
 
             var intent = Intent(this,MainActivity::class.java
             )
-         //   intent.putExtra("var1","Juan")
+            intent.putExtra("var1","Juan")
+
+            startActivity(intent)
 
 
 
+        }*/
 
-
-        }
-*/
 
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -94,7 +97,7 @@ class EmptyActivity : AppCompatActivity() {
 
 
         }
-        startActivity(intent)
+       // startActivity(intent)
     }
 
 }

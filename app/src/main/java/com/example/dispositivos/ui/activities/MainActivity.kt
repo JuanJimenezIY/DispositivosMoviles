@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -40,39 +41,41 @@ class MainActivity : AppCompatActivity() {
     private fun initClass() {
         binding.btnLogin.setOnClickListener {
             //obtenemos la instancia de la clase
-            val loginVal =LoginValidator()
+            //val loginVal =LoginValidator()
             //acceod al metodo y le vincio los dos parametros que necsito
-            val check= LoginValidator().checkLogin(
+            val check = LoginValidator().checkLogin(
                 binding.txtName.text.toString(),
                 binding.txtPassword.text.toString()
             )
 
 
-            if (check){
-
-                lifecycleScope.launch(Dispatchers.IO){
-                    saveDataStore( binding.txtName.text.toString())
+            if (check) {
+/*
+                lifecycleScope.launch(Dispatchers.IO) {
+                    saveDataStore(binding.txtName.text.toString())
+                }
+*/
+                //Intents
+                var intent = Intent(
+                    this, EmptyActivity::class.java
+                )
+                //intent.putExtra("var1", "UCE")
+               // intent.putExtra("var2", binding.txtName.text.toString())
+                try {
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Log.d("UCE","fallo")
                 }
 
-
-
-                //Intents
-                var intent =Intent(this,EmptyActivity::class.java
-                )
-               intent.putExtra("var1","UCE")
-               // intent.putExtra("var2",binding.txtName.text.toString())
-                startActivity(intent)
-            }
-            else{
+            } else {
                 Snackbar.make(
-                    binding.txtTitulo
-                    ,"Usuario y contraseña incorrectos",
+                    binding.txtTitulo, "Usuario y contraseña incorrectos",
                     Snackbar.LENGTH_LONG
                 ).show()
             }
 
 
-/*
+            /*
 
             if(binding.txtName.text.toString()=="admin" && binding.txtName.text.toString()=="admin"){
 
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
 */
-           // binding.txtBuscar.text = "El codigo se ejecuta correctamente"
+            // binding.txtBuscar.text = "El codigo se ejecuta correctamente"
 
             //SUMA
             /*
@@ -105,16 +108,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
     }
+
 
     private suspend fun  saveDataStore(stringData: String){
         dataStore.edit {prefs->
 
 
-            prefs[stringPreferencesKey("usuario")]=   stringData
-            prefs[stringPreferencesKey("session")]=   UUID.randomUUID().toString()
-            prefs[stringPreferencesKey("email")]=   "dispositivos@gmail"
+            prefs[stringPreferencesKey("usuario")] =   stringData
+            prefs[stringPreferencesKey("session")] =   UUID.randomUUID().toString()
+            prefs[stringPreferencesKey("email")] =   "dispositivos@gmail"
 
         }
     }
