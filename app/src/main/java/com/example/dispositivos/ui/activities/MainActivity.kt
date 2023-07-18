@@ -1,10 +1,14 @@
 package com.example.dispositivos.ui.activities
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -50,11 +54,11 @@ class MainActivity : AppCompatActivity() {
 
 
             if (check) {
-/*
+
                 lifecycleScope.launch(Dispatchers.IO) {
                     saveDataStore(binding.txtName.text.toString())
                 }
-*/
+
                 //Intents
                 var intent = Intent(
                     this, EmptyActivity::class.java
@@ -73,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+
 
 
             /*
@@ -107,7 +112,48 @@ class MainActivity : AppCompatActivity() {
                 .show()*/
 
         }
+        binding.twitter.setOnClickListener{
+/*
+            var intent = Intent(
+                Intent.ACTION_VIEW,
+                //Uri.parse("https://twitter.com/home?lang=es")
+               // Uri.parse("geo: -0.1990867,-78.5102718")
+                Uri.parse("tel:0998762596")
 
+            )*/
+            val intent = Intent(
+                Intent.ACTION_WEB_SEARCH
+            )
+            intent.setClassName(
+                "com.google.android.googlequicksearchbox",
+                "com.google.android.googlequicksearchbox.SearchActivity"
+            )
+            intent.putExtra(
+                SearchManager.QUERY,"UCE")
+            startActivity(intent)
+        }
+
+        val appResultLocal= registerForActivityResult(StartActivityForResult()){
+            resultActivity->
+            when(resultActivity.resultCode){
+                RESULT_OK->{Log.d("UCE", "Resultado exitoso")
+                    Snackbar.make(binding.txtName,"Resultado exitoso",Snackbar.LENGTH_LONG).show()
+
+                }
+                RESULT_CANCELED->{Log.d("UCE", "Resultado fallido")
+
+                    Snackbar.make(binding.txtName,"Resultado fallido",Snackbar.LENGTH_LONG).show()
+                }
+                else ->{Log.d("UCE", "Resultado dudoso")}
+            }
+
+        }
+        binding.facebook.setOnClickListener{
+            val resIntent = Intent(this, ResultActivity::class.java)
+            appResultLocal.launch(resIntent)
+
+
+        }
     }
 
 
@@ -117,7 +163,7 @@ class MainActivity : AppCompatActivity() {
 
             prefs[stringPreferencesKey("usuario")] =   stringData
             prefs[stringPreferencesKey("session")] =   UUID.randomUUID().toString()
-            prefs[stringPreferencesKey("email")] =   "dispositivos@gmail"
+            prefs[stringPreferencesKey("email")] =     "dispositivos@gmail"
 
         }
     }
