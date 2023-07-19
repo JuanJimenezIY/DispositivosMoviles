@@ -174,15 +174,19 @@ class MainActivity : AppCompatActivity() {
         val speechToText = registerForActivityResult(StartActivityForResult()){activityResult ->
             val sn =Snackbar.make(binding.txtName,"",Snackbar.LENGTH_LONG)
             var message=""
-            var msg=""
+
             when(activityResult.resultCode){
                 RESULT_OK->{
 
-
-                     msg = activityResult.data?.getStringExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0).toString()
+                    message="proceso exitoso"
+                    sn.setBackgroundTint(resources.getColor(
+                        R.color.black
+                    ))
+                    val msg = activityResult.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0).toString()
 
                     if (msg.isNotEmpty()){
-                        val intent =Intent(Intent.ACTION_WEB_SEARCH)
+                        val intent =Intent(Intent.ACTION_WEB_SEARCH
+                        )
 
                         intent.setClassName(
                             "com.google.android.googlequicksearchbox",
