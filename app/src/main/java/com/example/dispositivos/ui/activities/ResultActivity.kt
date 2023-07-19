@@ -1,5 +1,6 @@
 package com.example.dispositivos.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dispositivos.R
@@ -19,7 +20,11 @@ class ResultActivity : AppCompatActivity() {
         super.onStart()
 
         binding.btnResultOk.setOnClickListener{
-            setResult(RESULT_OK)
+            val i = Intent()
+            i.putExtra("result","Resultado exitoso")
+
+
+            setResult(RESULT_OK,i)
             finish()
 
         }
