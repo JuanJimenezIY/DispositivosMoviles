@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+<!--    si non necesitamos la ubbicacion exacta de la persona-->
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+<!--    ubicacion exacta-->
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
 
     <application
         android:name=".ui.utilities.Dispositivos"

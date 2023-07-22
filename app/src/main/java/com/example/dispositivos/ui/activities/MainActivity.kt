@@ -1,15 +1,23 @@
 package com.example.dispositivos.ui.activities
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.SearchManager
+import android.content.ContentProviderClient
 import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.text.TextUtils
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult.*
+import androidx.core.content.PermissionChecker.PermissionResult
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -20,6 +28,11 @@ import com.example.dispositivos.R
 import com.example.dispositivos.databinding.ActivityMainBinding
 import com.example.dispositivos.logic.validator.LoginValidator
 import com.example.dispositivos.ui.utilities.Dispositivos
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+//import com.google.android.gms.location.FusedLocationProviderClient
+//import com.google.android.gms.location.LocationServices
+//import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 
@@ -29,13 +42,19 @@ import java.util.UUID
 
 // At the top level of your kotlin file:
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var  fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
     }
     override fun onStart() {
         super.onStart()
@@ -46,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
+    @SuppressLint("MissingPermission")
     private fun initClass() {
         binding.btnLogin.setOnClickListener {
             //obtenemos la instancia de la clase
@@ -115,8 +135,45 @@ class MainActivity : AppCompatActivity() {
             )
                 .show()*/
 
+
         }
+
+        val locationContract =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()){
+                    isGranted ->
+                when(isGranted){
+
+                    true ->{
+                        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                            it.longitude
+                            it.latitude
+                            val a=Geocoder(this)
+                            a.getFromLocation(it.latitude,it.longitude,1)
+                        }
+                        /*
+                        val task=fusedLocationProviderClient.lastLocation
+
+                        task.addOnSuccessListener {
+
+                            if (task.result != null) {
+                                Snackbar.make(
+                                    binding.txtTitulo,
+                                    "${it.latitude},${it.longitude}",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }*/}
+                    shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)-> {
+                        //Snackbar.make(binding.txtTitulo,"Encienda el GPS porfis",Snackbar.LENGTH_LONG).show()
+                    }
+                    false->{
+                       // Snackbar.make(binding.txtTitulo,"denegado",Snackbar.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         binding.twitter.setOnClickListener{
+            locationContract.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION)
 /*
             var intent = Intent(
                 Intent.ACTION_VIEW,
@@ -125,6 +182,7 @@ class MainActivity : AppCompatActivity() {
                 Uri.parse("tel:0998762596")
 
             )*/
+            /*
             val intent = Intent(
                 Intent.ACTION_WEB_SEARCH
             )
@@ -135,9 +193,12 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(
                 SearchManager.QUERY,"UCE")
             startActivity(intent)
+*/
+             //22/07/2023
+
         }
 
-        val appResultLocal= registerForActivityResult(StartActivityForResult()){
+        val appResultLocal= registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             resultActivity->
 
 
@@ -171,7 +232,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val speechToText = registerForActivityResult(StartActivityForResult()){activityResult ->
+        val speechToText = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult ->
             val sn =Snackbar.make(binding.txtName,"",Snackbar.LENGTH_LONG)
             var message=""
 
@@ -223,6 +284,7 @@ class MainActivity : AppCompatActivity() {
         binding.facebook.setOnClickListener{
            // val resIntent = Intent(this, ResultActivity::class.java)
             // appResultLocal.launch(resIntent)
+
             val intentSpech =Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 
             intentSpech.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,

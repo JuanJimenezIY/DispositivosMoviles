@@ -95,11 +95,11 @@ class FirstFragment : Fragment() {
         binding.spinner.adapter = adapter
         // binding.listView.adapter = adapter
 
-       //chargeDataRVDB(limit,offset)
+      // chargeDataRVDB(limit,offset)
        // chargeDataRV(limit,offset)
         binding.rvSwipe.setOnRefreshListener {
           //  chargeDataRVDB(limit,offset)
-           chargeDataRV(limit,offset)
+          chargeDataRV(limit,offset)
             //chargeDataRVDB(offset,limit)
             binding.rvSwipe.isRefreshing = false
         }

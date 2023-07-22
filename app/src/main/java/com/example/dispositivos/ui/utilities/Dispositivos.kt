@@ -12,12 +12,13 @@ class Dispositivos : Application(){
     val name_class : String = "Admin"
     override fun onCreate() {
         super.onCreate()
+/*
         db = Room.databaseBuilder(applicationContext,
             MarvelConnectionDB::class.java,
             "marvelDB"
                 ).build()
 
-
+*/
     }
 
     companion object {
