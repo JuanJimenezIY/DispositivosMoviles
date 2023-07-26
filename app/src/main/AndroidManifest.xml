@@ -3,12 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-<!--    si non necesitamos la ubbicacion exacta de la persona-->
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
-<!--    ubicacion exacta-->
-   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- si non necesitamos la ubbicacion exacta de la persona -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- ubicacion exacta -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".ui.utilities.Dispositivos"
@@ -23,13 +20,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.EmptyActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.CameraActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

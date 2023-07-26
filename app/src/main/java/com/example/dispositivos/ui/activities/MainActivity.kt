@@ -13,6 +13,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.provider.Settings
 import android.speech.RecognizerIntent
 import android.text.TextUtils
 import android.util.Log
@@ -31,14 +32,17 @@ import com.example.dispositivos.R
 import com.example.dispositivos.databinding.ActivityMainBinding
 import com.example.dispositivos.logic.validator.LoginValidator
 import com.example.dispositivos.ui.utilities.Dispositivos
+import com.example.dispositivos.ui.utilities.MyLocationManager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
+import com.google.android.gms.location.SettingsClient
 //import com.google.android.gms.location.FusedLocationProviderClient
 //import com.google.android.gms.location.LocationServices
 //import com.google.android.gms.tasks.Task
@@ -61,7 +65,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
+    private lateinit var client:SettingsClient
 
+    private lateinit var locationSettingsRequest: LocationSettingsRequest
     private var currentLocation: Location?=null
 
     @SuppressLint("MissingPermission")
@@ -71,11 +77,49 @@ class MainActivity : AppCompatActivity() {
 
                 true -> {
 
+                    client.checkLocationSettings(locationSettingsRequest).apply {
 
-                    val task = fusedLocationProviderClient.lastLocation
+                        addOnSuccessListener {
+                            val task = fusedLocationProviderClient.lastLocation
+                            task.addOnSuccessListener {
+                            location->
 
+                            fusedLocationProviderClient.requestLocationUpdates(
+                                locationRequest,
+                                locationCallback,
+                                Looper.getMainLooper()
+                            )
+                            }
+                        }
+                        addOnFailureListener{ex->
+
+                            if (ex is ResolvableApiException){
+                              //  startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                                ex.startResolutionForResult(
+                                    this@MainActivity,
+                                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED
+                                )
+                            }
+
+                        }
+
+
+                    }
+
+                }
+/*
                     task.addOnSuccessListener { location ->
-                        val alert= AlertDialog.Builder(this@MainActivity)
+                        val alert= AlertDialog.Builder(this).apply {
+                            setTitle("Notificacion")
+                            setMessage("Pro favor verificque si el gps esta activo")
+                            setPositiveButton("Verificar"){
+                                dialog,id->
+                                val i =Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                startActivity(i)
+                                dialog.dismiss()
+                            }
+                            setCancelable(false)
+                        }.show()
                         alert.apply {
                             setTitle("Alerta")
                             setMessage("Existe un problema con el sistema de posicionamiento global en el sistema")
@@ -96,14 +140,14 @@ class MainActivity : AppCompatActivity() {
                             locationCallback,
                             Looper.getMainLooper()
                         )
-                        location.longitude
-                        location.latitude
 
-                        /*it.longitude
+
+                        it.longitude
                         it.latitude
                         val a=Geocoder(this)
-                        a.getFromLocation(it.latitude,it.longitude,1)*/
+                        a.getFromLocation(it.latitude,it.longitude,1)
                     }
+
                     task.addOnFailureListener{ex->
                         if(ex is ResolvableApiException){
                             ex.startResolutionForResult(
@@ -113,7 +157,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     }
-                    /*
+
                     val task=fusedLocationProviderClient.lastLocation
 
                     task.addOnSuccessListener {
@@ -126,14 +170,15 @@ class MainActivity : AppCompatActivity() {
                             ).show()
                         }
                     }*/
-                }
 
-                shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+
+                shouldShowRequestPermissionRationale(
+                    Manifest.permission.ACCESS_FINE_LOCATION) -> {
                     //Snackbar.make(binding.txtTitulo,"Encienda el GPS porfis",Snackbar.LENGTH_LONG).show()
                 }
 
                 false -> {
-                    // Snackbar.make(binding.txtTitulo,"denegado",Snackbar.LENGTH_LONG).show()
+                     Snackbar.make(binding.txtTitulo,"denegado",Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -206,6 +251,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+
+
         locationRequest = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
             1000
@@ -226,6 +274,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        client=LocationServices.getSettingsClient(this)
+        locationSettingsRequest=LocationSettingsRequest.Builder()
+            .addLocationRequest(
+                locationRequest).build()
+
     }
 
     override fun onStart() {
@@ -418,6 +471,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun test(){
+        var location= MyLocationManager(this)
+
+        location.getUserLocation()
+    }
     /*
     setContentView(R.layout.activity_main)
     var boton1 = findViewById<TextView>(R.id.boton1)
