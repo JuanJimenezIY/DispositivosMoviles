@@ -6,9 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" /> <!-- si non necesitamos la ubbicacion exacta de la persona -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- ubicacion exacta -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:name=".ui.utilities.Dispositivos"
@@ -22,11 +21,14 @@
         android:theme="@style/Theme.Dispositivos"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activities.NotificationActivity"
+            android:exported="false" />
 
-        <receiver android:name=".ui.utilities.BroadcasterNotifications"
-            android:enabled="true"
+        <receiver
+            android:name=".ui.utilities.BroadcasterNotifications"
+            android:enabled="true" />
 
-            ></receiver>
         <activity
             android:name=".ui.activities.CameraActivity"
             android:exported="false" />
@@ -40,7 +42,7 @@
             android:name=".ui.activities.EmptyActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.NotificationActivity"
+            android:name=".ui.activities.ProgressActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

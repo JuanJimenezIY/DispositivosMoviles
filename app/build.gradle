@@ -58,7 +58,10 @@ dependencies {
     // Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-
+    //para los view models
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
 //room
     implementation "androidx.room:room-runtime:2.5.2"
@@ -70,6 +73,14 @@ dependencies {
     //Ubicacion
     implementation("com.google.android.gms:play-services-location:21.0.1")
 
-    //notificaciones
+    //ViewModels
+    // Fragment -
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+    // Activity
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    // LiveData - datos que se van a asociar alviewmodel para poder usarlos
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
 }
