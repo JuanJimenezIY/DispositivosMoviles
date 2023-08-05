@@ -82,5 +82,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     // LiveData - datos que se van a asociar alviewmodel para poder usarlos
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    //biometrica
 
+    implementation "androidx.biometric:biometric-ktx:1.2.0-alpha05"
 }
