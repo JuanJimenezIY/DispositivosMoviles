@@ -6,32 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.BiometricActivity">
 
-    <TextView
-        android:id="@+id/textBio"
+    <LinearLayout
+        android:id="@+id/lyMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Autenticacion biometrica"
-        android:textSize="42sp"
-        app:layout_constraintBottom_toTopOf="@id/imagenFinger"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
+        <TextView
+            android:id="@+id/textBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Autenticacion biometrica"
+            android:textSize="42sp">
 
-    <ImageView
-        android:id="@+id/imagenFinger"
-        android:layout_width="wrap_content"
+        </TextView>
+
+        <ImageView
+
+            android:id="@+id/imagenFinger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:src="@drawable/baseline_fingerprint_24">
+
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyMainCopia"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_fingerprint_24"
+
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true">
 
-    </ImageView>
+        >
+        <include layout="@layout/shimmer_layout_biometric"></include>
+        <include layout="@layout/shimmer_layout_biometric"></include>
+        <include layout="@layout/shimmer_layout_biometric"></include>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
