@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.ContentProviderClient
+
 import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
@@ -17,6 +18,7 @@ import android.provider.Settings
 import android.speech.RecognizerIntent
 import android.text.TextUtils
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult.*
@@ -43,10 +45,14 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 //import com.google.android.gms.location.FusedLocationProviderClient
 //import com.google.android.gms.location.LocationServices
 //import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.launch
@@ -69,6 +75,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var locationSettingsRequest: LocationSettingsRequest
     private var currentLocation: Location?=null
+    //firebase
+    private lateinit var auth: FirebaseAuth
+
 
     @SuppressLint("MissingPermission")
     val locationContract =
@@ -250,6 +259,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //firebase
+        auth = Firebase.auth
+        binding.registro.setOnClickListener {
+            authWithFirebaseEmail(
+                binding.txtName.text.toString(),
+                binding.txtPassword.text.toString()
+            )
+        }
+        binding.btnLogin.setOnClickListener {
+            signWithFirebaseEmail(
+                binding.txtName.text.toString(),
+                binding.txtPassword.text.toString()
+            )
+        }
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
 
@@ -281,8 +305,90 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun authWithFirebaseEmail(email:String, password:String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(Constants.TAG, "createUserWithEmail:success")
+
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication success.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    val user =auth.currentUser
+
+
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(Constants.TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                }
+            }
+
+
+
+    }
+    private fun signWithFirebaseEmail(email:String, password:String) {
+        auth.signInWithEmailAndPassword (email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(Constants.TAG, "singInrWithEmail:success")
+                    val user =auth.currentUser
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication success.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                    startActivity(Intent(this,EmptyActivity::class.java))
+
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(Constants.TAG, "singInrWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                }
+            }
+
+
+
+    }
+
+    private fun recoveryPasswordEmail(email:String){
+        auth.sendPasswordResetEmail(email).addOnCompleteListener{
+            task->
+            if (task.isSuccessful){
+                Toast.makeText(
+                    baseContext,
+                    "Correo de recuperacion enviado correctamente",
+                    Toast.LENGTH_SHORT,
+                ).show()
+
+                MaterialAlertDialogBuilder(this).apply {
+
+                }
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
+
+
         initClass()
 
 
@@ -299,7 +405,7 @@ class MainActivity : AppCompatActivity() {
     }
     @SuppressLint("MissingPermission")
     private fun initClass() {
-        binding.btnLogin.setOnClickListener {
+   /*     binding.btnLogin.setOnClickListener {
             //obtenemos la instancia de la clase
             //val loginVal =LoginValidator()
             //acceod al metodo y le vincio los dos parametros que necsito
@@ -369,7 +475,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
+*/
 
         binding.twitter.setOnClickListener {
             locationContract.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION)
